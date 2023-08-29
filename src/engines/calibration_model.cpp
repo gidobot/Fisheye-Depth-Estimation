@@ -101,7 +101,8 @@ namespace engine
                                                   K1_, D1_, K2_, D2_, img_size_,
                                                   R_, T_, cv::fisheye::CALIB_RECOMPUTE_EXTRINSIC);
         std::cout << "Calib error: " << rms << std::endl;
-        int rect_flag = cv::fisheye::CALIB_ZERO_DISPARITY;
+		//int rect_flag = cv::fisheye::CALIB_ZERO_DISPARITY;
+		int rect_flag = cv::CALIB_ZERO_DISPARITY;
         cv::fisheye::stereoRectify(K1_, D1_, K2_, D2_, img_size_,
                                    R_, T_, R1_, R2_, P1_, P2_, Q,
                                    rect_flag, img_size_, 0, fov_);

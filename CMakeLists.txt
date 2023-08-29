@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
 project(fisheye_stereo)
 
-set(CMAKE_CXX_STANDARD 23)
+#set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 # set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -pthread")
 
 find_package(OpenCV REQUIRED)
 find_package(PCL REQUIRED)
@@ -54,6 +55,13 @@ add_executable(test
     src/utils/undistort_utils.cpp
 )
 target_link_libraries(test stereo_matcher pcd_generator ${OpenCV_LIBS} ${PCL_LIBRARIES})
+
+add_executable(test_pair
+    app/test_pair.cpp
+    src/utils/config_utils.cpp
+    src/utils/undistort_utils.cpp
+)
+target_link_libraries(test_pair stereo_matcher pcd_generator ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
 add_executable(compare_fisheye
     app/compare_fisheye.cpp
